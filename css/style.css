@@ -10,8 +10,9 @@
 }
 
 .c-square{
-    max-width: 850px;
     height: auto;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 /* HEADER */
@@ -24,26 +25,9 @@ img{
 }
 
 /* MAIN */
-.c-square{
-    max-width: 850px;
-    height: auto;
-}
-
-.sq-red3{
-    width: calc(800px / 10);
-    height: calc(800px / 10);
-    background-color: red;
-    border: 1px solid black;
-}
-.sq-red2{
-    width: calc(800px / 9);
-    height: calc(800px / 9);
-    background-color: red;
-    border: 1px solid black;
-}
-.sq-red1{
-    width: calc(800px / 7);
-    height: calc(800px / 7);
+.sq{
+    width: 50px;
+    height: 50px;
     background-color: red;
     border: 1px solid black;
 }
