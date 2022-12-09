@@ -28,8 +28,19 @@ function sqCreator(){
 // function which create a grid
 function gridCreator(sqQuantity, sqRow){
     grid.innerHTML = ''
-
     grid.style.width= `calc(50px * ${sqRow})`
+    
+    let array = createBombsArray(1,sqQuantity);
+    function isItPresent(array,confrontElement){
+        let i = 0; 
+        while(i<16){
+        if(array[i]==confrontElement){
+            return true;
+        }
+        i++;
+    }
+    return false;
+    }
     // ========================================   
     for(let i=0; i<sqQuantity; i++){
         let square= sqCreator(sqQuantity);
@@ -38,16 +49,21 @@ function gridCreator(sqQuantity, sqRow){
         
         // function 'click' on the created square
         square.addEventListener('click', function(){
-            this.classList.add('sq-aqua');
             this.innerText= i+1;
+            this.classList.add('sq-aqua');
+            if(isItPresent(array,this.innerText)){
+                this.classList.add('bomb')
+                
+            }
+
             console.log(this.innerText);
+            
         })
     }
     
     // ==================================================
     document.getElementById('main-c').appendChild(grid);
 
-    console.log(sqQuantity)
 }
 
 play_button.addEventListener('click', function(){
@@ -61,7 +77,7 @@ function difficultySelector(){
 
     let sqQuantity;
     let sqRow;
-
+    
     switch(difficulty){
         case 'Level_1':
             sqQuantity = 100;
@@ -79,39 +95,32 @@ function difficultySelector(){
             sqQuantity = 100;
             sqRow = 10;
             break;
-    }
+}
     gridCreator(sqQuantity, sqRow);
 }
 
-
-
-
-
-
-
-
-
-
-
 // JS-CAMPOMINATO-DOM
-// 1. Generare 16 numeri casuali
-// function createBombsArray(min, max){
-//     let i=0;
-//     let bombs={}
+// Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe. Attenzione: nella stessa cella può essere posizionata al massimo una bomba, perciò nell’array delle bombe non potranno esserci due numeri uguali.
+// In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+// La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
+// Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba.
 
-//     while(i < 16){
-//         let number = Math.floor(Math.random() * (max - min +1)) + min;
-//         if(!bombs.includes(number)) //se number non è incluso (!arrayBombs) nell'arrayBombs
-//         {
-//             bombs.push(number);
-//             i++;
-//         }
 
-//     }
-//     return bombs
-// }
+function createBombsArray(min, max){
+    let bombs=[]
+    let i=0;
+    while(i < 16){
+        let number = Math.floor(Math.random() * (max - min +1)) + min;
+        if(!bombs.includes(number)) //se number non è incluso (!arrayBombs) nell'arrayBombs
+        {
+            bombs.push(number);
+            i++;
+        }
+    }
+    console.log(bombs)
+    return bombs
+}
 
-// 2.
 
 
 
