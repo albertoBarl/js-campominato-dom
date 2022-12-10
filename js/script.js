@@ -31,7 +31,7 @@ function gridCreator(sqQuantity, sqRow){
     grid.style.width= `calc(50px * ${sqRow})`
     
     let array = createBombsArray(1,sqQuantity);
-    function isItPresent(array,confrontElement){
+    function areBombs(array,confrontElement){
         let i = 0; 
         while(i<16){
         if(array[i]==confrontElement){
@@ -51,13 +51,12 @@ function gridCreator(sqQuantity, sqRow){
         square.addEventListener('click', function(){
             this.innerText= i+1;
             this.classList.add('sq-aqua');
-            if(isItPresent(array,this.innerText)){
-                this.classList.add('bomb')
+            if(areBombs(array,this.innerText)){
+                this.classList.add('bomb');
+                alert('DAMN! YOU EXPLODED!!!');
                 
             }
-
             console.log(this.innerText);
-            
         })
     }
     
